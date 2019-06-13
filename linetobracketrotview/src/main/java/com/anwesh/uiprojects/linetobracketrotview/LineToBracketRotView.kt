@@ -65,3 +65,21 @@ fun Canvas.drawLTBNode(i : Int, scale : Float, paint : Paint) {
     drawLineToBracketRot(i, size, sc1, sc2, paint)
     restore()
 }
+
+class LineToBracketRotView(ctx : Context) : View(ctx) {
+
+    private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+    override fun onDraw(canvas : Canvas) {
+
+    }
+
+    override fun onTouchEvent(event : MotionEvent) : Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+
+            }
+        }
+        return true
+    }
+}
