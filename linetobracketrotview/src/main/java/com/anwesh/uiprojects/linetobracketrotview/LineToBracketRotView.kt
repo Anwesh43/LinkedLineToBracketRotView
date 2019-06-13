@@ -39,6 +39,7 @@ fun Canvas.drawLineToBracketRot(i : Int, size : Float, sc1 : Float, sc2 : Float,
     val sf : Float = 1f - 2 * i
     save()
     translate(size * sc2i * sf, 0f)
+    drawLine(0f, -size, 0f, size, paint)
     for (j in 0..(lines - 1)) {
         val sci1j : Float = sc1i.divideScale(j, lines)
         save()
@@ -62,7 +63,9 @@ fun Canvas.drawLTBNode(i : Int, scale : Float, paint : Paint) {
     val sc2 : Float = scale.divideScale(1, 2)
     save()
     translate(w / 2, gap * (i + 1))
-    drawLineToBracketRot(i, size, sc1, sc2, paint)
+    for (j in 0..(lines - 1)) {
+        drawLineToBracketRot(j, size, sc1, sc2, paint)
+    }
     restore()
 }
 
@@ -227,7 +230,7 @@ class LineToBracketRotView(ctx : Context) : View(ctx) {
         fun create(activity : Activity) : LineToBracketRotView {
             val view : LineToBracketRotView = LineToBracketRotView(activity)
             activity.setContentView(view)
-            return view 
+            return view
         }
     }
 }
