@@ -221,4 +221,13 @@ class LineToBracketRotView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : LineToBracketRotView {
+            val view : LineToBracketRotView = LineToBracketRotView(activity)
+            activity.setContentView(view)
+            return view 
+        }
+    }
 }
