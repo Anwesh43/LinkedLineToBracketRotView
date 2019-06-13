@@ -117,7 +117,7 @@ class LineToBracketRotView(ctx : Context) : View(ctx) {
             }
         }
 
-        fun start(cb : () -> Unit) {
+        fun start() {
             if (!animated) {
                 animated = true
                 view.postInvalidate()
@@ -175,7 +175,7 @@ class LineToBracketRotView(ctx : Context) : View(ctx) {
         }
     }
 
-    data class LineToBreakRot(var i : Int) {
+    data class LineToBracketRot(var i : Int) {
 
         private val root : LTBRNode = LTBRNode(0)
         private var curr : LTBRNode = root
@@ -196,6 +196,28 @@ class LineToBracketRotView(ctx : Context) : View(ctx) {
 
         fun startUpdating(cb : () -> Unit) {
             curr.startUpdating(cb)
+        }
+    }
+
+    data class Renderer(var view : LineToBracketRotView) {
+
+        private val ltbr : LineToBracketRot = LineToBracketRot(0)
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            ltbr.draw(canvas, paint)
+            animator.animate {
+                ltbr.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            ltbr.startUpdating {
+                animator.start()
+            }
         }
     }
 }
